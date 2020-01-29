@@ -55,7 +55,7 @@ def set_func_userid( func ):
 
 def get_userid():
     if func_userid:
-        return func_userid()
+        return func_userid
     raise RuntimeError('ERR: get_userid() has not been set')
 
 
@@ -65,7 +65,7 @@ def set_func_groupid( func ):
 
 def get_groupid():
     if func_groupid:
-        return func_groupid()
+        return func_groupid
     return None
 
 
@@ -101,7 +101,7 @@ class UUID(types.TypeDecorator):
 
         return value
 
-    def process_bind_param(self, value, dialect):
+    def process_bind_param(self, value, dialect):   # redeclared above without usage
         if value is None:
             return value
 
@@ -467,7 +467,7 @@ def clear_caches_XXX(success):
     log.debug('Attempting to clear id caches')
     if not success:
         log.info('Clearing id caches')
-        idcache.clear_all()
+        idcache_XXX.clear_all()
 
 #current_t = transaction.get()
 #current_t.addAfterCommitHook(clear_caches)

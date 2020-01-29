@@ -1,5 +1,7 @@
 import logging
 
+from rhombus.views.generics import error_page
+
 log = logging.getLogger(__name__)
 
 from pyramid.renderers import render_to_response

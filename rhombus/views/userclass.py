@@ -5,6 +5,9 @@ from rhombus.views import *
 
 import io, yaml
 
+from rhombus.views.generics import error_page
+
+
 @roles(SYSADM)
 def index(request):
     dbh = get_dbhandler()

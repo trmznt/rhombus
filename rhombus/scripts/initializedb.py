@@ -12,9 +12,9 @@ from pyramid.paster import (
 from pyramid.scripts.common import parse_vars
 
 from ..models import (
-    DBSession,
-    MyModel,
-    Base,
+    DBSession,  # cannot find reference error
+    MyModel,    # cannot find reference error
+    Base,       # cannot find reference error
     )
 
 

@@ -1,4 +1,4 @@
-
+import urllib.request as urllib2
 from rhombus.lib.utils import cout, cerr
 
 # LDAP data:
@@ -23,7 +23,7 @@ def validate_by_basichttp(username, passwd, scheme):
 
     # Create an OpenerDirector with support for Basic HTTP Authentication...
     auth_handler = urllib2.HTTPBasicAuthHandler()
-    auth_handler.add_password(realm=realm,
+    auth_handler.add_password(realm=realm,  # cannot find reference 'add_password'
                           uri=url,
                           user=username,
                           passwd=passwd)
@@ -31,7 +31,7 @@ def validate_by_basichttp(username, passwd, scheme):
     try:
         opener.open(url)
         return True
-    except urllib2.HTTPError:
+    except urllib2.HTTPError:   # cannot find reference 'HTTPError'
         return False
 
 authfunc = {
@@ -45,7 +45,7 @@ authfunc = {
 
 def inquire_by_LDAP( username, scheme ):
     import ldap
-    l = ldap.open(scheme['host'])
+    l = ldap.open(scheme['host'])   # cannot find reference 'open'
     try:
         r = l.search_s( scheme['DN'] % username, ldap.SCOPE_SUBTREE,
                             '(objectclass=*)', [ 'sn', 'givenName'] )

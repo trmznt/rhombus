@@ -29,7 +29,7 @@ def setup(args):
         configfile = os.environ.get('PYRAMID_CONFIG', None)
 
     if not configfile:
-        usage()
+        usage(args)
 
     setup_logging( configfile )
     settings = get_appsettings( configfile )

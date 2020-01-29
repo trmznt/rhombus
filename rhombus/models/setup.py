@@ -1,3 +1,4 @@
+from sqlalchemy.orm import session
 
 from rhombus.models.ek import EK
 from rhombus.models.user import Group, UserClass
@@ -11,7 +12,7 @@ import transaction
 def setup_db( *ops ):
     """ setup the database (create tables, etc) and populate with basic data """
 
-    base = get_base()
+    base = get_base()   # unresolved reference (import) error
 
     # WARN: use alembic to create initial tables
     #base.metadata.create_all()
@@ -22,11 +23,11 @@ def setup_db( *ops ):
 
     with transaction.manager:
         EK.bulk_insert( ek_initlist )
-        Group.bulk_insert( essential_groups )
+        Group.bulk_insert(essential_groups)     # parameter 'dbsession' unfilled
 
         file = File( path='/', type='file/folder', mimetype='application/x-directory',
-                    group_id = Group._id('_SysAdm_'), permanent = True )
-        dbsession.add( file )
+                    group_id = Group._id('_SysAdm_'), permanent = True )    # parameter 'dbsession' unfilled
+        dbsession.add( file )       # unresolved reference error
 
         for op in ops:
             op()
@@ -38,7 +39,7 @@ def setup( dbh, rootpasswd=None ):
 
     if get_datalogger():
         get_clsreg().sync()
-        session.commit()
+        session.commit()    # cannot find reference 'commit'
 
     dbsession = dbh.session()
 

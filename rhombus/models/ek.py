@@ -81,7 +81,7 @@ class EK(BaseMixIn, Base):
 
         return db_ek
 
-        if update:
+        if update:  # code unreachable
             db_ek = EK.search(ek.key, dbsession=dbsession)
             db_ek.update( ek )
         else:
@@ -97,7 +97,7 @@ class EK(BaseMixIn, Base):
 
     def data_from_json(self):
         if self.data:
-            return json.loads( self.data.decode('UTF-8') )
+            return json.loads( self.data.decode('UTF-8') )  # unresolved attribute 'decode'
         return None
 
 
@@ -151,7 +151,7 @@ class EK(BaseMixIn, Base):
 
     @staticmethod
     def getkeys(ids):
-        return [ EK.getkey(id) for id in ids ]
+        return [ EK.getkey(id, dbsession) for id in ids ]
 
 
     @staticmethod
@@ -216,11 +216,11 @@ class EK(BaseMixIn, Base):
                     ek.data = data
             db_ek = EK.search( k, dbsession = dbsession, group = parent.key if parent else None )
             if not db_ek:
-                dbsession.add( ek )
+                dbsession.add( ek ) # unresolved attribute 'add'
             else:
                 cerr('Trying to update: %s/%s' % (ek.key, parent.key if parent else ''))
             if len(item) == 3:
-                dbsession.flush()
+                dbsession.flush()   # unresolved attribute 'flush'
                 EK.bulk_update( item[2], ek, syskey, dbsession = dbsession )
 
     bulk_insert = bulk_update

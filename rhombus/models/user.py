@@ -277,16 +277,16 @@ class User(Base):
         return None
 
     def set_pref(self, key, data):
-        g_jsoncache.set_data(self, key, data)
+        g_jsoncache.set_data(self, key, data)               # unresolved g_json_cache error
 
     def get_pref(self, key, default):
-        return g_jsoncache.get_data(self, key, default)
+        return g_jsoncache.get_data(self, key, default)     # unresolved g_json_cache error
 
     def raw_pref(self):
-        return g_jsoncache.raw_data(self)
+        return g_jsoncache.raw_data(self)                   # unresolved g_json_cache error
 
     def save_pref(self):
-        g_jsoncache.save_data(self)
+        g_jsoncache.save_data(self)                         # unresolved g_json_cache error
 
     def groupids(self):
         dbsession = object_session(self)
@@ -409,7 +409,7 @@ class Group(Base):
 
         if (self.flags & self.f_composite_group):
             uginfo = AssociatedGroup.get_usergroup_info_query(self, 'C').filter( UserGroup.user_id == user_id).one()
-            if ug and uginfo[1] == 'A':
+            if ug and uginfo[1] == 'A':     # unresolved ug error
                 return True
             return False
 
@@ -645,7 +645,7 @@ class UserInstance(object):
 
         for grp in groups:
             if isinstance(grp, str):
-                grp_id = Group._id( grp )
+                grp_id = Group._id(grp, dbsession)
                 grpname = grp
             elif isinstance(grp, int):
                 grp_id = grp
@@ -658,7 +658,7 @@ class UserInstance(object):
                 for (grpname, grp_id) in self.groups:
                     if grpname == grp[0]:
                         return True
-            if (grpname, grp_id) in self.groups:
+            if (grpname, grp_id) in self.groups:    # variable 'grpname', 'grp_id' might be referenced before assignment
                 return True
         return False
 

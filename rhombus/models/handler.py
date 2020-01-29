@@ -2,7 +2,7 @@
 import sys
 
 from rhombus.lib.utils import cerr, cout
-from rhombus.models import (core, meta, ek, user, actionlog, filemgr)
+from rhombus.models import (core, meta, ek, user, actionlog, filemgr, DataLogger, set_datalogger, get_clsreg)
 from sqlalchemy import engine_from_config, event
 
 cinfo = print
@@ -75,7 +75,7 @@ class DBHandler(object):
         else:
             return self.UserClass.search(userclass, self.session())
 
-        raise RuntimeError('ERR: unknown data type for getting UserClass!')
+        raise RuntimeError('ERR: unknown data type for getting UserClass!')     # code unreachable
 
 
     def get_user(self, user=None):

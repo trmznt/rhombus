@@ -18,7 +18,7 @@ from pyramid.events import BeforeRender
 import dogpile.cache
 import dogpile.cache.util
 
-from rhombus.lib.utils import cout, cerr, get_dbhandler
+from rhombus.lib.utils import cout, cerr, get_dbhandler, random_string
 from rhombus.lib import helpers as h
 
 from rhombus.scripts import run

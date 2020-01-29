@@ -17,7 +17,7 @@ from sqlalchemy import event, MetaData
 
 from zope.sqlalchemy import register
 
-__all__ = ['get_base', 'get_dbsession', 'set_datalogger', 'set_before_update_flag']
+__all__ = ['get_base', 'get_dbsession', 'set_datalogger', 'set_before_update_flag']     # unresolved reference 'set_before_update_flag' error
 
 class RhoSession(Session):
 
