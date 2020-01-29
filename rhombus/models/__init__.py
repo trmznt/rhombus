@@ -8,6 +8,9 @@ from rhombus.models import (core, meta, ek, user, actionlog, filemgr)
 #from .filemgr import *
 from sqlalchemy import engine_from_config
 
+from rhombus.models.core import DataLogger, get_clsreg
+from rhombus.models.meta import get_dbsession, get_base, set_datalogger
+
 cinfo = print
 
 

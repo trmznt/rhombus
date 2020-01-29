@@ -1,7 +1,7 @@
 
 from rhombus.views import *
 from rhombus.lib.tags import button
-from rhombus.lib.modals import popup, modal_delete
+from rhombus.lib.modals import popup, modal_delete, modal_error
 
 from rhombus.models.user import Group
 
@@ -10,6 +10,8 @@ from pyramid.renderers import render
 from sqlalchemy import exc
 
 import json
+
+from rhombus.views.generics import error_page
 
 
 @roles( PUBLIC )

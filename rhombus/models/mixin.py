@@ -6,7 +6,7 @@ from sqlalchemy.orm import exc
 
 class DictEmulator(object):
 
-    def __init__(self, getitem_func, setitem_func):
+    def __init__(self, getitem_func, setitem_func, delitem_func):
         self._getitem_ = getitem_func
         self._setitem_ = setitem_func
         self._delitem_ = delitem_func
@@ -44,20 +44,20 @@ class EnumDataMixIn(BaseMixIn):
         return Column(types.Integer, ForeignKey('eks.id'), nullable=False)
     @declared_attr
     def cat(cls):
-        return EK.proxy('cat_id')
+        return EK.proxy('cat_id')   # parameter 'grpname' unfilled
     """ data enumerated category """
 
     @declared_attr
     def val_id(cls):
         return Column(types.Integer, ForeignKey('eks.id'), nullable=False)
     def val(cls):
-        return EK.proxy('val_id')
+        return EK.proxy('val_id')   # parameter 'grpname' unfilled
     """ data enumerated value """
 
     @classmethod
     def proxy(cls, attrname):
         def _getter(inst):
-            return EnumDataDict(inst)
+            return EnumDataDict(inst, attrname)
         def _setter(inst):
             raise RuntimeError("Dict-based class cannot be set")
         return property(_getter, _setter) 
@@ -81,7 +81,7 @@ class StringDataMixIn(BaseMixIn):
         return Column(types.Integer, ForeignKey('eks.id'), nullable=False)
     @declared_attr
     def cat(cls):
-        return EK.proxy('cat_id')
+        return EK.proxy('cat_id')   # parameter 'grpname' unfilled
     """ data enumerated category """
 
     @declared_attr
@@ -115,12 +115,12 @@ class DictInterface(object):
             raise KeyError('key not found')
 
     def __getitem__(self, key):
-        ek_id = EK.getid( key )
+        ek_id = EK.getid(key, dbsession)
         obj = self.getobj(ek_id)
         return obj.val
 
     def __setitem__(self, key, value):
-        ek_id = EK.getid( key )
+        ek_id = EK.getid(key, dbsession)
         try:
             obj = self.getobj(ek_id)
             obj.val = value

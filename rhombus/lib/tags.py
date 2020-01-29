@@ -62,7 +62,7 @@ class htmltag(object):
             self.contents.append( element )
             self.register_element( element )
             continue
-            if not isinstance(el, htmltag):
+            if not isinstance(el, htmltag): # code unreachable
                 continue
             if el.id:
                 identifier = el.id

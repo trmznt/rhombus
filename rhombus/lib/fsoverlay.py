@@ -96,7 +96,7 @@ class FileOverlay(object):
                 self.mount_point = get_virtmount(self.abspath)
             self.virtpath = get_virtpath(self.abspath, self.mount_point)
         else:
-        	raise RuntimeERror('ERR - need either virtpath or abspath')
+        	raise RuntimeError('ERR - need either virtpath or abspath')
         self.parent = None
         self._meta = None
         self.type = type
@@ -118,9 +118,9 @@ class FileOverlay(object):
     @staticmethod
     def save(parentpath, filename, content, filetype='file/file',
                     mimetype=None, permanent = False):
-        parent = FileOverlay.open( parentpath )
+        parent = FileOverlay.open( parentpath ) # unresolved attribute 'open'
         if not parent:
-            raise RuntimeError('Parent path not found: %s' % ppath)
+            raise RuntimeError('Parent path not found: %s' % parentpath)
 
 
     @staticmethod

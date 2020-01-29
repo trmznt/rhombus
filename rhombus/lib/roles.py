@@ -34,5 +34,5 @@ def is_sysadm(user):
 
     return user.has_roles(SYSADM)
 
-    raise NotImplementedError('Need to think about this')
+    raise NotImplementedError('Need to think about this')   # code unreachable
     return True

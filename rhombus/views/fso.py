@@ -9,6 +9,8 @@ import docutils.core
 
 import shutil, os, re
 
+from rhombus.views.generics import error_page
+
 
 def get_file_size(file):
     file.seek(0, 2) # Seek to the end of the file
@@ -87,7 +89,7 @@ def serve_file(path, user=None, mount_point=None, formatter=None,
     abspath = fso_file.abspath
     if os.path.isdir(abspath):
         if virtual_indexer:
-            return virtual_indexer( abspath )
+            return virtual_indexer( abspath )   # bool object not callable
         raise RuntimeError('ERR - virtual index not allowed!')
 
     if formatter:

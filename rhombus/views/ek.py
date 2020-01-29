@@ -1,4 +1,4 @@
-
+from rhombus.models.ek import EK
 from rhombus.views import *
 from rhombus.views.generics import error_page
 
@@ -144,7 +144,7 @@ def lookup(request):
 def action(request):
 
     if not request.POST:
-        return error_page()
+        return error_page(request)
 
     method = request.POST.get('_method')
 
